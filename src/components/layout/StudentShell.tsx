@@ -8,6 +8,7 @@ import {
   Flame, Star, ChevronRight, BookOpenCheck, FileText,
   ShieldAlert, Layers, Award, User
 } from 'lucide-react';
+import { AppLogo } from '../ui/AppLogo';
 
 // ── Primary nav (shown in sidebar desktop / bottom nav mobile) ──
 const PRIMARY_NAV = [
@@ -144,15 +145,9 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
       {/* ─── Desktop Sidebar ───────────────────────────────────────── */}
       <aside className="student-sidebar">
         {/* Logo */}
-        <div className="p-5 border-b border-slate-100">
-          <Link to="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-700 to-blue-500 flex items-center justify-center text-white font-black text-sm shadow-sm shrink-0">
-              PUM
-            </div>
-            <div>
-              <div className="font-extrabold text-slate-900 text-sm leading-tight">NMMS Champion</div>
-              <div className="text-xs text-slate-500 font-medium leading-tight">PUM School</div>
-            </div>
+        <div className="p-4 border-b border-slate-100">
+          <Link to="/dashboard">
+            <AppLogo size="sm" />
           </Link>
         </div>
 

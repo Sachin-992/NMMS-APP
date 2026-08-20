@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Shield, Lock, Mail, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, ArrowLeft } from 'lucide-react';
+import { AppLogo } from '../../components/ui/AppLogo';
 
 export const AdminLogin: React.FC = () => {
   const { loginAdmin } = useAuth();
@@ -35,8 +36,8 @@ export const AdminLogin: React.FC = () => {
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Student Login</span>
         </Link>
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-600 text-white font-black text-2xl shadow-xl mb-3">
-          <Shield className="w-8 h-8" />
+        <div className="inline-flex justify-center mb-3">
+          <AppLogo size="lg" showText={false} />
         </div>
         <h1 className="text-2xl font-bold text-white tracking-tight">
           Admin & Teacher Portal

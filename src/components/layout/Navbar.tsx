@@ -6,6 +6,7 @@ import {
   BookOpen, Flame, Trophy, Award, 
   LogOut, ShieldAlert, LayoutDashboard, Brain, FileCheck, Layers
 } from 'lucide-react';
+import { AppLogo } from '../ui/AppLogo';
 
 export const Navbar: React.FC = () => {
   const { t, toggleLanguage } = useLanguage();
@@ -34,19 +35,8 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           
-          <Link to={role === 'STUDENT' ? '/dashboard' : '/admin/dashboard'} className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
-              NMMS
-            </div>
-            <div>
-              <div className="font-bold text-slate-900 leading-tight text-base sm:text-lg flex items-center gap-2">
-                <span>PUM NMMS Champion</span>
-                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-medium hidden sm:inline-block">
-                  2026–27
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 font-medium">PUM School, Echampatti</p>
-            </div>
+          <Link to={role === 'STUDENT' ? '/dashboard' : '/admin/dashboard'}>
+            <AppLogo size="md" />
           </Link>
 
           {isAuthenticated && role === 'STUDENT' && (

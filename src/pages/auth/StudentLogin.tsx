@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { LogIn, KeyRound, UserCheck, ShieldCheck, School } from 'lucide-react';
+import { AppLogo } from '../../components/ui/AppLogo';
 
 export const StudentLogin: React.FC = () => {
   const { loginStudent } = useAuth();
@@ -49,8 +50,8 @@ export const StudentLogin: React.FC = () => {
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center px-4">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white font-black text-2xl shadow-xl mb-4 ring-4 ring-blue-500/20">
-          NMMS
+        <div className="inline-flex justify-center mb-3">
+          <AppLogo size="xl" showText={false} />
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
           PUM NMMS Champion
