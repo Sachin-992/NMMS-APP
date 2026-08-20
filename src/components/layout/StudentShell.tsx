@@ -280,7 +280,7 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
         className="student-mobile-bottomnav fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200"
         style={{ height: 'var(--bottomnav-height)' }}
       >
-        <div className="flex h-full items-stretch">
+        <div className="w-full h-full flex">
           {PRIMARY_NAV.slice(0, 4).map(item => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -288,7 +288,7 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex-1 flex flex-col items-center justify-center gap-0.5 px-0.5 min-w-0 transition-colors ${
+                className={`flex-1 flex flex-col items-center justify-center gap-0.5 px-1 min-w-0 transition-colors ${
                   active ? 'text-blue-600' : 'text-slate-500'
                 }`}
               >
@@ -305,7 +305,7 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
           {/* More button */}
           <button
             onClick={() => setMoreOpen(true)}
-            className="flex-1 flex flex-col items-center justify-center gap-0.5 px-0.5 min-w-0 text-slate-500 cursor-pointer"
+            className="flex-1 flex flex-col items-center justify-center gap-0.5 px-1 min-w-0 text-slate-500 cursor-pointer"
           >
             <MoreHorizontal className="w-5 h-5 shrink-0 text-slate-400" strokeWidth={1.75} />
             <span className="w-full text-center text-[9px] font-bold leading-none whitespace-nowrap">More</span>
