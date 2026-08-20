@@ -249,13 +249,8 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
 
       {/* ─── Mobile Top Bar ──────────────────────────────────────────── */}
       <header className="student-mobile-topbar fixed top-0 left-0 right-0 z-30 bg-white border-b border-slate-200 px-4" style={{ height: 'var(--topbar-height)', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link to="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-700 to-blue-500 flex items-center justify-center text-white font-black text-xs shadow-sm">
-            PUM
-          </div>
-          <div>
-            <div className="font-extrabold text-slate-900 text-sm leading-tight">NMMS Champion</div>
-          </div>
+        <Link to="/dashboard">
+          <AppLogo size="sm" showSubtitle={false} />
         </Link>
 
         <div className="flex items-center gap-2">
@@ -285,7 +280,7 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
         className="student-mobile-bottomnav fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-200"
         style={{ height: 'var(--bottomnav-height)' }}
       >
-        <div className="flex h-full">
+        <div className="flex h-full items-stretch">
           {PRIMARY_NAV.slice(0, 4).map(item => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -293,22 +288,27 @@ export const StudentShell: React.FC<{ children: React.ReactNode }> = ({ children
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold transition-colors ${
+                className={`flex-1 flex flex-col items-center justify-center gap-0.5 px-0.5 min-w-0 transition-colors ${
                   active ? 'text-blue-600' : 'text-slate-500'
                 }`}
               >
-                <Icon className={`w-5 h-5 ${active ? 'text-blue-600' : 'text-slate-400'}`} strokeWidth={active ? 2.5 : 1.75} />
-                <span>{t(item.labelKey)}</span>
+                <Icon
+                  className={`w-5 h-5 shrink-0 ${active ? 'text-blue-600' : 'text-slate-400'}`}
+                  strokeWidth={active ? 2.5 : 1.75}
+                />
+                <span className="w-full text-center text-[9px] font-bold leading-none whitespace-nowrap overflow-hidden text-ellipsis">
+                  {t(item.labelKey)}
+                </span>
               </Link>
             );
           })}
           {/* More button */}
           <button
             onClick={() => setMoreOpen(true)}
-            className="flex-1 flex flex-col items-center justify-center gap-0.5 text-[10px] font-bold text-slate-500 cursor-pointer"
+            className="flex-1 flex flex-col items-center justify-center gap-0.5 px-0.5 min-w-0 text-slate-500 cursor-pointer"
           >
-            <MoreHorizontal className="w-5 h-5 text-slate-400" strokeWidth={1.75} />
-            <span>More</span>
+            <MoreHorizontal className="w-5 h-5 shrink-0 text-slate-400" strokeWidth={1.75} />
+            <span className="w-full text-center text-[9px] font-bold leading-none whitespace-nowrap">More</span>
           </button>
         </div>
       </nav>
