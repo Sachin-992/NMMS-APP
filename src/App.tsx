@@ -38,6 +38,8 @@ const ContentVerificationPage = lazy(() => import('./pages/admin/ContentVerifica
 const QuestionImporterPage    = lazy(() => import('./pages/admin/QuestionImporterPage').then(m => ({ default: m.QuestionImporterPage })));
 const AdminExamGuidePage      = lazy(() => import('./pages/admin/AdminExamGuidePage').then(m => ({ default: m.AdminExamGuidePage })));
 const AdminPaperManagerPage   = lazy(() => import('./pages/admin/AdminPaperManagerPage').then(m => ({ default: m.AdminPaperManagerPage })));
+const AdminMockExamPage       = lazy(() => import('./pages/admin/AdminMockExamPage').then(m => ({ default: m.AdminMockExamPage })));
+const AdminAnalyticsPage      = lazy(() => import('./pages/admin/AdminAnalyticsPage').then(m => ({ default: m.AdminAnalyticsPage })));
 
 // Loading fallback component
 const PageLoader: React.FC = () => (
@@ -173,7 +175,7 @@ export function App() {
                 path="mock-creator"
                 element={
                   <Suspense fallback={<PageLoader />}>
-                    <AdminDashboard />
+                    <AdminMockExamPage />
                   </Suspense>
                 }
               />
@@ -181,7 +183,7 @@ export function App() {
                 path="analytics"
                 element={
                   <Suspense fallback={<PageLoader />}>
-                    <AdminDashboard />
+                    <AdminAnalyticsPage />
                   </Suspense>
                 }
               />

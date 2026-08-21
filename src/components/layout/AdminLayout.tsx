@@ -3,9 +3,9 @@ import { Link, useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import {
-  Shield, LayoutDashboard, Users, FileCheck, Upload,
+  Shield, LayoutDashboard, Users, Upload,
   Award, BarChart3, LogOut, Globe, Menu, X,
-  ChevronRight, GraduationCap, BookOpenCheck, FileText
+  ChevronRight, GraduationCap, BookOpenCheck
 } from 'lucide-react';
 
 const NAV_GROUPS = [
@@ -18,8 +18,6 @@ const NAV_GROUPS = [
   {
     label: 'Academic',
     items: [
-      { path: '/admin/papers', label: 'Official Papers CMS', icon: FileText },
-      { path: '/admin/content-review', label: 'Content & Verification', icon: FileCheck },
       { path: '/admin/guide', label: 'Exam Guide CMS', icon: BookOpenCheck },
       { path: '/admin/import', label: 'Import Questions', icon: Upload },
       { path: '/admin/mock-creator', label: 'Mock Exams', icon: Award },

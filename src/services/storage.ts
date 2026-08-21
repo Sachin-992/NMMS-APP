@@ -378,6 +378,15 @@ export const getMockExams = (): MockExam[] => {
   return JSON.parse(localStorage.getItem(KEYS.MOCK_EXAMS) || '[]');
 };
 
+export const saveMockExam = (exam: MockExam): void => {
+  initializeStorage();
+  const exams = getMockExams();
+  const idx = exams.findIndex(e => e.id === exam.id);
+  if (idx >= 0) exams[idx] = exam;
+  else exams.unshift(exam);
+  localStorage.setItem(KEYS.MOCK_EXAMS, JSON.stringify(exams));
+};
+
 export const saveExamAttempt = (attempt: ExamAttempt): void => {
   initializeStorage();
   const attempts: ExamAttempt[] = JSON.parse(localStorage.getItem(KEYS.EXAM_ATTEMPTS) || '[]');
