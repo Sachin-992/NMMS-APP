@@ -8,7 +8,7 @@ import {
 import type { Question } from '../../types';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { 
-  CheckCircle2, XCircle, ArrowRight, ShieldCheck, 
+  CheckCircle2, XCircle, ArrowRight, 
   Sparkles, HelpCircle, FileText, Brain
 } from 'lucide-react';
 
@@ -156,11 +156,31 @@ export const PracticePage: React.FC = () => {
               </span>
             </div>
 
-            {/* Official Source Evidence Badge */}
-            <div className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{currentQ.source_name} ({currentQ.source_year})</span>
-            </div>
+            {/* Question Source Badges */}
+            {currentQ.source_type === 'OFFICIAL_QUESTION_PAPER' && (
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span>🟢 Official Previous-Year ({currentQ.source_year})</span>
+              </div>
+            )}
+            {currentQ.source_type === 'OFFICIAL_QUESTION_BANK' && (
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-blue-800 bg-blue-100 px-3 py-1 rounded-full border border-blue-300">
+                <span className="w-2 h-2 rounded-full bg-blue-600" />
+                <span>🔵 Official Model Paper</span>
+              </div>
+            )}
+            {currentQ.source_type === 'TEACHER_CREATED_FROM_OFFICIAL_PATTERN' && (
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-purple-800 bg-purple-100 px-3 py-1 rounded-full border border-purple-300">
+                <span className="w-2 h-2 rounded-full bg-purple-600" />
+                <span>🟣 Official-Pattern Practice</span>
+              </div>
+            )}
+            {(!currentQ.source_type || currentQ.source_type === 'OFFICIAL_SAMPLE') && (
+              <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
+                <span className="w-2 h-2 rounded-full bg-amber-600" />
+                <span>🟡 Concept Practice</span>
+              </div>
+            )}
           </div>
 
           {/* Question Text */}

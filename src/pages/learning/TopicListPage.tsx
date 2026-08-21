@@ -5,13 +5,25 @@ import { getSubjects, getTopics, getConcepts } from '../../services/storage';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { ArrowLeft, BookOpen, ChevronRight, ShieldCheck } from 'lucide-react';
 
+import { MATTopicExplorerPage } from './MATTopicExplorerPage';
+
 export const TopicListPage: React.FC = () => {
   const { subjectCode } = useParams<{ subjectCode: string }>();
   const { language } = useLanguage();
   const navigate = useNavigate();
 
   const subjects = getSubjects();
-  const subject = subjects.find(s => s.code === subjectCode);
+  const subject = subjects.find(s => s.code === subjectCode || s.id === subjectCode);
+
+  // Route MAT subject to the dedicated MAT Topic Explorer
+  if (
+    subjectCode === 'MAT' || 
+    subjectCode === 'subj-mat' || 
+    subject?.code === 'MAT' ||
+    subject?.id === 'subj-mat'
+  ) {
+    return <MATTopicExplorerPage />;
+  }
 
   if (!subject) {
     return (

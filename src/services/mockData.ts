@@ -1,5 +1,8 @@
 import type { Subject, Topic, Concept, Question, Student, MockExam, Achievement, SystemSettings } from '../types';
 
+import { VERIFIED_MAT_TOPICS, VERIFIED_MAT_CONCEPTS, VERIFIED_MAT_QUESTIONS } from '../data/mat_topic_system';
+import { VERIFIED_SAT_TOPICS, VERIFIED_SAT_CONCEPTS } from '../data/sat_topic_system';
+
 export const INITIAL_SYSTEM_SETTINGS: SystemSettings = {
   exam_date_status: 'NOT_ANNOUNCED',
   exam_date: '',
@@ -14,11 +17,11 @@ export const INITIAL_SUBJECTS: Subject[] = [
     code: 'MAT',
     name_en: 'Mental Ability Test (MAT)',
     name_ta: 'மனத்திறன் தேர்வு (MAT)',
-    description_en: 'Visual reasoning, number series, coding-decoding, and pattern recognition.',
-    description_ta: 'வரைபட வினாக்கள், எண் தொடர்கள், குறியீட்டு வினாக்கள் மற்றும் அமைப்புகளைக் கண்டறிதல்.',
+    description_en: 'Number reasoning, verbal logic, non-verbal patterns, logical sequences, and spatial perception.',
+    description_ta: 'எண் பகுப்பாய்வு, சொல் மற்றும் எழுத்துத் தொடர், வரைபட வடிவங்கள், தர்க்கவியல் மற்றும் காட்சிப் பிம்பங்கள்.',
     icon: 'Brain',
     order_index: 1,
-    topics_count: 4
+    topics_count: VERIFIED_MAT_TOPICS.length
   },
   {
     id: 'subj-math',
@@ -29,7 +32,7 @@ export const INITIAL_SUBJECTS: Subject[] = [
     description_ta: '7 மற்றும் 8 ஆம் வகுப்பு கணிதம்: எண்கள், இயற்கணிதம், வடிவியல் மற்றும் அளவியல்.',
     icon: 'Calculator',
     order_index: 2,
-    topics_count: 3
+    topics_count: VERIFIED_SAT_TOPICS.filter(t => t.subject_id === 'subj-math').length
   },
   {
     id: 'subj-science',
@@ -40,7 +43,7 @@ export const INITIAL_SUBJECTS: Subject[] = [
     description_ta: 'இயற்பியல், வேதியியல் மற்றும் உயிரியல் தமிழ்நாடு சமச்சீர் கல்வி பாடத்திட்டம்.',
     icon: 'Atom',
     order_index: 3,
-    topics_count: 4
+    topics_count: VERIFIED_SAT_TOPICS.filter(t => t.subject_id === 'subj-science').length
   },
   {
     id: 'subj-social',
@@ -51,80 +54,18 @@ export const INITIAL_SUBJECTS: Subject[] = [
     description_ta: 'வரலாறு, புவியியல், குடிமையியல் மற்றும் பொருளியல் பாடங்கள்.',
     icon: 'Globe',
     order_index: 4,
-    topics_count: 3
+    topics_count: VERIFIED_SAT_TOPICS.filter(t => t.subject_id === 'subj-social').length
   }
 ];
 
 export const INITIAL_TOPICS: Topic[] = [
-  {
-    id: 'topic-mat-1',
-    subject_id: 'subj-mat',
-    title_en: 'Number Series & Pattern Completion',
-    title_ta: 'எண் தொடர்கள் மற்றும் அமைப்புகள் நிரப்புதல்',
-    description_en: 'Identify mathematical relationships between consecutive numbers in a series.',
-    description_ta: 'தொடரில் உள்ள எண்களுக்கு இடையேயான கணிதத் தொடர்பைக் கண்டறிதல்.',
-    order_index: 1,
-    source_evidence: 'TN DGE NMMS MAT Question Paper Section 1 (Qs 1-10)',
-    concepts_count: 2
-  },
-  {
-    id: 'topic-mat-2',
-    subject_id: 'subj-mat',
-    title_en: 'Analogy & Relationship Matching',
-    title_ta: 'ஒப்புமை மற்றும் தொடர்பு அறிதல்',
-    description_en: 'Find similar relationships between pairs of numbers, words, or figures.',
-    description_ta: 'எண்கள், வார்த்தைகள் அல்லது வடிவங்களுக்கு இடையேயான ஒப்புமைகளைக் கண்டறிதல்.',
-    order_index: 2,
-    source_evidence: 'TN DGE NMMS MAT Question Paper Section 2 (Qs 11-25)',
-    concepts_count: 2
-  },
-  {
-    id: 'topic-mat-3',
-    subject_id: 'subj-mat',
-    title_en: 'Visual & Figure Reasoning',
-    title_ta: 'வரைபட மற்றும் காட்சி பகுப்பாய்வு',
-    description_en: 'Non-verbal reasoning: Mirror images, pattern completion, and figure counting.',
-    description_ta: 'கண்ணாடிப் பிம்பங்கள், வடிவம் பூர்த்தி செய்தல் மற்றும் முக்கோணங்கள் எண்ணுதல்.',
-    order_index: 3,
-    source_evidence: 'TN DGE NMMS MAT Non-Verbal Section (Qs 60-75)',
-    concepts_count: 1
-  },
-  {
-    id: 'topic-math-1',
-    subject_id: 'subj-math',
-    title_en: 'Rational Numbers & Real Numbers',
-    title_ta: 'விகிதமுறு எண்கள் மற்றும் மெய் எண்கள்',
-    description_en: 'Properties of rational numbers, square roots, and exponent laws.',
-    description_ta: 'விகிதமுறு எண்களின் பண்புகள், வர்க்கமூலம் மற்றும் அடுக்கு விதிகள்.',
-    order_index: 1,
-    source_evidence: 'Class 8 Term 1 Maths Chapter 1 & TN NMMS 2024 Math Qs',
-    concepts_count: 1
-  },
-  {
-    id: 'topic-sci-1',
-    subject_id: 'subj-science',
-    title_en: 'Measurement & Motion (Physics)',
-    title_ta: 'அளவீட்டியல் மற்றும் இயக்கம் (இயற்பியல்)',
-    description_en: 'SI units, speed, velocity, acceleration, and distance-time graphs.',
-    description_ta: 'SI அலகுகள், வேகம், திசைவேகம் மற்றும் தொலைவு-நேர வரைபடம்.',
-    order_index: 1,
-    source_evidence: 'Class 8 Science Term 1 & TN DGE NMMS Science Section',
-    concepts_count: 1
-  },
-  {
-    id: 'topic-soc-1',
-    subject_id: 'subj-social',
-    title_en: 'Indian Constitution & Civics',
-    title_ta: 'இந்திய அரசியலமைப்பு மற்றும் குடிமையியல்',
-    description_en: 'Preamble, Fundamental Rights, Duties, and Parliamentary System.',
-    description_ta: 'முகப்புரை, அடிப்படை உரிமைகள், கடமைகள் மற்றும் நாடாளுமன்ற முறை.',
-    order_index: 1,
-    source_evidence: 'Class 8 Social Science Civics Unit 1 & TN NMMS 2024',
-    concepts_count: 1
-  }
+  ...VERIFIED_MAT_TOPICS,
+  ...VERIFIED_SAT_TOPICS
 ];
 
 export const INITIAL_CONCEPTS: Concept[] = [
+  ...VERIFIED_MAT_CONCEPTS,
+  ...VERIFIED_SAT_CONCEPTS,
   {
     id: 'concept-mat-num-series',
     topic_id: 'topic-mat-1',
@@ -172,6 +113,7 @@ export const INITIAL_CONCEPTS: Concept[] = [
 ];
 
 export const INITIAL_QUESTIONS: Question[] = [
+  ...VERIFIED_MAT_QUESTIONS,
   {
     id: 'q-mat-2024-01',
     subject_id: 'subj-mat',

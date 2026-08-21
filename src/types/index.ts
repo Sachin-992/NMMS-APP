@@ -40,16 +40,64 @@ export interface Subject {
   topics_count?: number;
 }
 
+export type MATCategoryCode = 
+  | 'NUMBER_REASONING'
+  | 'VERBAL_REASONING'
+  | 'NON_VERBAL_REASONING'
+  | 'LOGICAL_REASONING'
+  | 'SPATIAL_VISUAL';
+
+export interface MATCategory {
+  id: string;
+  code: MATCategoryCode;
+  name_en: string;
+  name_ta: string;
+  description_en: string;
+  description_ta: string;
+  icon: string;
+  order_index: number;
+  topics_count?: number;
+}
+
+export type TopicPriority = 'HIGH_PRIORITY' | 'MEDIUM_PRIORITY' | 'FOUNDATION';
+export type TopicConfidence = 'HIGH' | 'MEDIUM' | 'LOW';
+export type TopicSyllabusStatus = 'EXPLICIT_OFFICIAL' | 'PATTERN_VERIFIED' | 'SUPPLEMENTARY';
+
+export interface TopicVerificationRecord {
+  topic_id: string;
+  syllabus_status: TopicSyllabusStatus;
+  found_in_official_papers: boolean;
+  years_found: number[];
+  frequency: 'HIGH' | 'MEDIUM' | 'LOW';
+  confidence: TopicConfidence;
+  evidence_source: string;
+  status: 'VERIFIED' | 'UNDER_REVIEW' | 'PROPOSED';
+  rationale_en: string;
+  rationale_ta: string;
+}
+
 export interface Topic {
   id: string;
   subject_id: string;
+  category_id?: string;
+  category_code?: MATCategoryCode;
   title_en: string;
   title_ta: string;
   description_en: string;
   description_ta: string;
   order_index: number;
+  priority?: TopicPriority;
+  confidence?: TopicConfidence;
+  syllabus_status?: TopicSyllabusStatus;
+  years_found?: number[];
+  frequency?: 'HIGH' | 'MEDIUM' | 'LOW';
   source_evidence?: string;
   concepts_count?: number;
+  questions_count?: number;
+  official_questions_count?: number;
+  practice_questions_count?: number;
+  difficulty_level?: 'EASY' | 'MEDIUM' | 'HARD';
+  is_published?: boolean;
 }
 
 export interface SolvedQuestion {
