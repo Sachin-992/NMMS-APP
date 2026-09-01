@@ -131,7 +131,9 @@ export type SourceType =
   | 'OFFICIAL_QUESTION_PAPER'
   | 'OFFICIAL_QUESTION_BANK'
   | 'OFFICIAL_SAMPLE'
-  | 'TEACHER_CREATED_FROM_OFFICIAL_PATTERN';
+  | 'TEACHER_CREATED_FROM_OFFICIAL_PATTERN'
+  | 'VERIFIED_NMMS_DERIVED'
+  | 'ORIGINAL_NMMS_STYLE';
 
 export type VerificationStatus = 
   | 'DRAFT'
@@ -163,9 +165,9 @@ export interface Question {
   image_url?: string;
   source_type: SourceType;
   source_name: string;
-  source_url: string;
-  source_year: number;
-  source_page: number;
+  source_url?: string;
+  source_year?: number;
+  source_page?: number;
   verification_status: VerificationStatus;
   created_by?: string;
   verified_by?: string;
@@ -224,15 +226,20 @@ export interface ExamAttempt {
   id: string;
   student_id: string;
   mock_exam_id: string;
-  started_at: string;
-  completed_at: string;
+  started_at?: string;
+  completed_at?: string;
+  attempted_at?: string;
   score: number;
   total_questions: number;
   time_taken_seconds: number;
+  passed?: boolean;
   mat_score?: number;
   sat_score?: number;
-  detailed_analysis: {
-    topic_accuracy: Record<string, { total: number; correct: number; percentage: number }>;
+  answers?: ExamAnswer[];
+  detailed_analysis?: {
+    mat_score?: number;
+    sat_score?: number;
+    topic_accuracy?: Record<string, any>;
     strongest_topic?: string;
     weakest_topic?: string;
   };

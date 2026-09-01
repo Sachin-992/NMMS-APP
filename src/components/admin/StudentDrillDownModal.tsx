@@ -236,7 +236,7 @@ export const StudentDrillDownModal: React.FC<StudentDrillDownModalProps> = ({ st
                     <div key={att.id} className="p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs">
                       <div>
                         <div className="font-extrabold text-slate-800">{att.mock_exam_id}</div>
-                        <div className="text-slate-500 font-medium">{new Date(att.completed_at).toLocaleDateString()}</div>
+                        <div className="text-slate-500 font-medium">{new Date(att.completed_at || att.attempted_at || Date.now()).toLocaleDateString()}</div>
                       </div>
                       <div className="text-right">
                         <div className="font-extrabold text-purple-700 text-sm">

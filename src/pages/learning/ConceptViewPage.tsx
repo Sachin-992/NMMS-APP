@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { getConcepts, getTopics, updateDailyMissionProgress } from '../../services/storage';
+import { getConcepts, getTopics, updateDailyMissionProgress, markTopicLearned } from '../../services/storage';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { 
   ArrowLeft, Lightbulb, HelpCircle, 
@@ -252,6 +252,12 @@ ${currentTopic.description_ta}
   ];
 
   const currentStepInfo = stepsList[currentStep - 1];
+
+  useEffect(() => {
+    if (currentStep === 5 && student && topicId) {
+      markTopicLearned(student.id, topicId);
+    }
+  }, [currentStep, student, topicId]);
 
   const handleStepChange = (targetStep: number) => {
     setCurrentStep(targetStep);
@@ -566,16 +572,16 @@ ${currentTopic.description_ta}
 
             <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-950 text-xs font-extrabold px-4 py-2 rounded-full border border-emerald-300">
               <Award className="w-4 h-4 text-emerald-700" />
-              <span>Topic Badge Unlocked • +100 XP Mastery Bonus</span>
+              <span>Topic Marked Learned • Ready for Practice Questions</span>
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
-                onClick={() => navigate('/practice')}
+                onClick={() => navigate(`/practice?topicId=${topicId || ''}`)}
                 className="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>Start Practice Questions</span>
+                <span>Practice This Topic ({language === 'ta' ? 'பயிற்சி வினாக்கள்' : 'Practice Qs'})</span>
               </button>
 
               <button

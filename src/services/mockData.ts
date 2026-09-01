@@ -1,7 +1,9 @@
 import type { Subject, Topic, Concept, Question, Student, MockExam, Achievement, SystemSettings } from '../types';
 
 import { VERIFIED_MAT_TOPICS, VERIFIED_MAT_CONCEPTS, VERIFIED_MAT_QUESTIONS } from '../data/mat_topic_system';
-import { VERIFIED_SAT_TOPICS, VERIFIED_SAT_CONCEPTS } from '../data/sat_topic_system';
+import { VERIFIED_SAT_TOPICS, VERIFIED_SAT_CONCEPTS, VERIFIED_SAT_QUESTIONS } from '../data/sat_topic_system';
+import { MOCK_MAT_EXAM_QUESTIONS } from '../data/mock_mat_questions';
+import { MOCK_SAT_EXAM_QUESTIONS } from '../data/mock_sat_questions';
 
 export const INITIAL_SYSTEM_SETTINGS: SystemSettings = {
   exam_date_status: 'NOT_ANNOUNCED',
@@ -114,6 +116,7 @@ export const INITIAL_CONCEPTS: Concept[] = [
 
 export const INITIAL_QUESTIONS: Question[] = [
   ...VERIFIED_MAT_QUESTIONS,
+  ...VERIFIED_SAT_QUESTIONS,
   {
     id: 'q-mat-2024-01',
     subject_id: 'subj-mat',
@@ -289,24 +292,24 @@ export const INITIAL_MOCK_EXAMS: MockExam[] = [
     title_en: 'Official MAT Grand Practice Examination 1',
     title_ta: 'அதிகாரப்பூர்வ MAT மாதிரித் தேர்வு 1',
     type: 'MAT',
-    duration_minutes: 90,
-    total_questions: 90,
+    duration_minutes: 45,
+    total_questions: 45,
     pass_percentage: 40,
     status: 'PUBLISHED',
     created_at: '2026-01-10T00:00:00Z',
-    questions: INITIAL_QUESTIONS.filter(q => q.subject_id === 'subj-mat')
+    questions: MOCK_MAT_EXAM_QUESTIONS
   },
   {
     id: 'mock-sat-full-1',
     title_en: 'Official SAT Grand Practice Examination 1',
     title_ta: 'அதிகாரப்பூர்வ SAT மாதிரித் தேர்வு 1',
     type: 'SAT',
-    duration_minutes: 90,
-    total_questions: 90,
+    duration_minutes: 45,
+    total_questions: 45,
     pass_percentage: 40,
     status: 'PUBLISHED',
     created_at: '2026-01-10T00:00:00Z',
-    questions: INITIAL_QUESTIONS.filter(q => q.subject_id !== 'subj-mat')
+    questions: MOCK_SAT_EXAM_QUESTIONS
   }
 ];
 

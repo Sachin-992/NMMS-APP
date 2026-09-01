@@ -152,8 +152,8 @@ export const getTopics = (subjectId?: string): Topic[] => {
   initializeStorage();
   let topics: Topic[] = JSON.parse(localStorage.getItem(KEYS.TOPICS) || '[]');
   
-  // Migration check: Ensure topics in localStorage contain all MAT (20) and SAT (39) topics from INITIAL_TOPICS
-  if (topics.length < INITIAL_TOPICS.length || topics.some(t => t.id === 'topic-math-1')) {
+  // Migration check: Ensure topics in localStorage contain all MAT and SAT topics from INITIAL_TOPICS
+  if (topics.length < INITIAL_TOPICS.length || !topics.some(t => t.id === 'topic-sat-soc-secularism') || topics.some(t => t.id === 'topic-math-1')) {
     topics = INITIAL_TOPICS;
     localStorage.setItem(KEYS.TOPICS, JSON.stringify(topics));
   }
@@ -244,9 +244,23 @@ export const getQuestions = (filter?: {
   topicId?: string;
   verificationStatus?: string;
   pyqOnly?: boolean;
+  learnedOnly?: boolean;
+  needsPracticeOnly?: boolean;
+  priorityOnly?: boolean;
+  studentId?: string;
 }): Question[] => {
   initializeStorage();
   let questions: Question[] = JSON.parse(localStorage.getItem(KEYS.QUESTIONS) || '[]');
+
+  // Auto-migration check: ensure questions in storage include all INITIAL_QUESTIONS (80+ questions)
+  if (questions.length < INITIAL_QUESTIONS.length) {
+    const existingIds = new Set(questions.map(q => q.id));
+    const missing = INITIAL_QUESTIONS.filter(q => !existingIds.has(q.id));
+    if (missing.length > 0) {
+      questions = [...questions, ...missing];
+      localStorage.setItem(KEYS.QUESTIONS, JSON.stringify(questions));
+    }
+  }
 
   if (filter?.subjectId) {
     questions = questions.filter(q => q.subject_id === filter.subjectId);
@@ -265,8 +279,35 @@ export const getQuestions = (filter?: {
   if (filter?.pyqOnly) {
     questions = questions.filter(q => q.source_type === 'OFFICIAL_QUESTION_PAPER');
   }
+  if (filter?.priorityOnly) {
+    const topics = getTopics();
+    const highPriorityTopicIds = new Set(topics.filter(t => t.priority === 'HIGH_PRIORITY').map(t => t.id));
+    questions = questions.filter(q => q.topic_id && highPriorityTopicIds.has(q.topic_id));
+  }
+  if (filter?.learnedOnly && filter.studentId) {
+    const learnedIds = getLearnedTopicIds(filter.studentId);
+    if (learnedIds.length > 0) {
+      const learnedSet = new Set(learnedIds);
+      questions = questions.filter(q => q.topic_id && learnedSet.has(q.topic_id));
+    }
+  }
 
   return questions;
+};
+
+// ---------------- TOPIC PROGRESS & MASTERY HELPERS ----------------
+export const markTopicLearned = (studentId: string, topicId: string): void => {
+  const key = `pum_learned_topics_${studentId}`;
+  const learned: string[] = JSON.parse(localStorage.getItem(key) || '[]');
+  if (!learned.includes(topicId)) {
+    learned.push(topicId);
+    localStorage.setItem(key, JSON.stringify(learned));
+  }
+};
+
+export const getLearnedTopicIds = (studentId: string): string[] => {
+  const key = `pum_learned_topics_${studentId}`;
+  return JSON.parse(localStorage.getItem(key) || '[]');
 };
 
 export const saveQuestion = (question: Question): void => {
@@ -375,7 +416,31 @@ export const updateDailyMissionProgress = (
 // ---------------- MOCK EXAMS & ATTEMPTS ----------------
 export const getMockExams = (): MockExam[] => {
   initializeStorage();
-  return JSON.parse(localStorage.getItem(KEYS.MOCK_EXAMS) || '[]');
+  let mockExams: MockExam[] = JSON.parse(localStorage.getItem(KEYS.MOCK_EXAMS) || '[]');
+  
+  // Auto-migration: ensure mock exams reflect updated 45-question / 45-minute structure and unique question pools
+  if (mockExams.length < INITIAL_MOCK_EXAMS.length || mockExams.some(e => e.total_questions !== 45 || !e.questions || e.questions.length === 0)) {
+    mockExams = INITIAL_MOCK_EXAMS;
+    localStorage.setItem(KEYS.MOCK_EXAMS, JSON.stringify(mockExams));
+  }
+
+  return mockExams;
+};
+
+export const getActiveMockState = (examId: string, studentId: string) => {
+  const key = `pum_active_mock_${examId}_${studentId}`;
+  const saved = localStorage.getItem(key);
+  return saved ? JSON.parse(saved) : null;
+};
+
+export const saveActiveMockState = (examId: string, studentId: string, state: any) => {
+  const key = `pum_active_mock_${examId}_${studentId}`;
+  localStorage.setItem(key, JSON.stringify(state));
+};
+
+export const clearActiveMockState = (examId: string, studentId: string) => {
+  const key = `pum_active_mock_${examId}_${studentId}`;
+  localStorage.removeItem(key);
 };
 
 export const saveMockExam = (exam: MockExam): void => {

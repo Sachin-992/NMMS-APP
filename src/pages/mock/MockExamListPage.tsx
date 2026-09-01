@@ -26,8 +26,8 @@ export const MockExamListPage: React.FC = () => {
           </h1>
           <p className="mt-1 text-sm text-slate-500 font-medium">
             {language === 'ta'
-              ? 'உண்மையான 90 நிமிட தேர்வு சூழல் (MAT & SAT).'
-              : 'Authentic 90-minute timed NMMS examination simulations.'}
+              ? 'அதிகாரப்பூர்வ 45 நிமிட மாதிரித் தேர்வு சூழல் (45 வினாக்கள் | 45 மதிப்பெண்).'
+              : 'Authentic 45-minute timed NMMS examination simulations (45 Qs | 45 Marks).'}
           </p>
         </div>
 

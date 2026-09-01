@@ -138,6 +138,46 @@ export const StudentDashboard: React.FC = () => {
         {/* Left 2 Columns: Today's Mission & Performance */}
         <div className="lg:col-span-2 space-y-6">
           
+          {/* This Week's Focus Topic Strip */}
+          <div className="bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-900 text-white rounded-3xl p-6 border border-emerald-800/80 shadow-md relative overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    This Week's Focus • 31.08.2026 – 03.09.2026
+                  </span>
+                  <span className="text-xs font-bold text-slate-300">SAT Social Science</span>
+                </div>
+                <h3 className="text-lg font-black text-white">
+                  8.C.3 — {language === 'ta' ? 'மதச்சார்பின்மையைப் புரிந்துகொள்ளுதல்' : 'Understanding Secularism'}
+                </h3>
+                <p className="text-xs text-slate-300 font-medium">
+                  {language === 'ta'
+                    ? 'வகுப்பு 8 குடிமையியல் அலகு 3: 5 கருத்துக்கள் & 20 பாடநூல் சார்ந்த வினாக்கள்.'
+                    : 'Class 8 Civics Unit 3: 5 core concepts & 20 textbook-verified practice questions.'}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => navigate('/learn/subj-social')}
+                  className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>{language === 'ta' ? 'பாடத்தைப் படி' : 'Learn Topic'}</span>
+                </button>
+
+                <button
+                  onClick={() => navigate('/practice?topicId=topic-sat-soc-secularism')}
+                  className="px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <span>{language === 'ta' ? 'பயிற்சி செய்' : 'Practice Now'}</span>
+                  <ArrowRight className="w-4 h-4 text-emerald-600" />
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Today's Mission Card */}
           <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm relative">
             <div className="flex items-center justify-between mb-4">

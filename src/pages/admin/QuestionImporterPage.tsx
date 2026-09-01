@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getQuestions, saveQuestion, getSubjects, getTopics } from '../../services/storage';
+import { isDuplicateQuestion } from '../../services/duplicateDetector';
 import type { Question, VerificationStatus, SourceType, Difficulty } from '../../types';
 import { 
   Upload, FileCheck, Search, Plus, CheckCircle2, XCircle, 
@@ -171,6 +172,12 @@ export const QuestionImporterPage: React.FC = () => {
   const handleSaveManualQuestion = (e: React.FormEvent) => {
     e.preventDefault();
     if (!manualForm.question_en.trim()) return;
+
+    const dupCheck = isDuplicateQuestion(manualForm, questions);
+    if (dupCheck.isDuplicate) {
+      alert(`⚠ Duplicate Question Rejected!\n${dupCheck.reason}`);
+      return;
+    }
 
     const newQ: Question = {
       id: `q-manual-${Date.now()}`,
