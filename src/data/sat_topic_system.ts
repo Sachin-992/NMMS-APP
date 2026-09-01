@@ -1,5 +1,7 @@
 import type { Topic, Concept, Question } from '../types';
 import { SECULARISM_TOPIC, SECULARISM_CONCEPTS, SECULARISM_PRACTICE_QUESTIONS } from './sat_secularism_topic';
+import { POPULATION_TOPIC, POPULATION_CONCEPTS, POPULATION_PRACTICE_QUESTIONS } from './sat_population_topic';
+import { MONEY_TOPIC, MONEY_CONCEPTS, MONEY_PRACTICE_QUESTIONS } from './sat_money_topic';
 
 /**
  * PUM NMMS CHAMPION — VERIFIED SAT TOPIC SYSTEM REGISTER
@@ -920,7 +922,9 @@ export const VERIFIED_SAT_TOPICS: Topic[] = [
     frequency: 'HIGH',
     source_evidence: 'TN Samacheer Kalvi Class 8 Economics Unit 2'
   },
-  SECULARISM_TOPIC
+  SECULARISM_TOPIC,
+  POPULATION_TOPIC,
+  MONEY_TOPIC
 ];
 
 /**
@@ -1106,7 +1110,9 @@ The Imperial Cholas (9th to 13th Century CE) established one of South India's gr
     },
     order_index: 1
   },
-  ...SECULARISM_CONCEPTS
+  ...SECULARISM_CONCEPTS,
+  ...POPULATION_CONCEPTS,
+  ...MONEY_CONCEPTS
 ];
 
 // ============================================================================
@@ -1685,5 +1691,7 @@ export const VERIFIED_SAT_QUESTIONS: Question[] = [
     verification_status: 'PUBLISHED',
     created_at: '2026-08-21T00:00:00Z'
   },
-  ...SECULARISM_PRACTICE_QUESTIONS
+  ...SECULARISM_PRACTICE_QUESTIONS,
+  ...POPULATION_PRACTICE_QUESTIONS,
+  ...MONEY_PRACTICE_QUESTIONS
 ];

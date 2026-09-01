@@ -153,7 +153,7 @@ export const getTopics = (subjectId?: string): Topic[] => {
   let topics: Topic[] = JSON.parse(localStorage.getItem(KEYS.TOPICS) || '[]');
   
   // Migration check: Ensure topics in localStorage contain all MAT and SAT topics from INITIAL_TOPICS
-  if (topics.length < INITIAL_TOPICS.length || !topics.some(t => t.id === 'topic-sat-soc-secularism') || topics.some(t => t.id === 'topic-math-1')) {
+  if (topics.length < INITIAL_TOPICS.length || !topics.some(t => t.id === 'topic-sat-soc-7IG3') || !topics.some(t => t.id === 'topic-sat-soc-8E1') || topics.some(t => t.id === 'topic-math-1')) {
     topics = INITIAL_TOPICS;
     localStorage.setItem(KEYS.TOPICS, JSON.stringify(topics));
   }

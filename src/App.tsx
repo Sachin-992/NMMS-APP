@@ -30,6 +30,8 @@ const ExamGuidePage           = lazy(() => import('./pages/guide/ExamGuidePage')
 const OfficialPaperLibraryPage = lazy(() => import('./pages/papers/OfficialPaperLibraryPage').then(m => ({ default: m.OfficialPaperLibraryPage })));
 const PaperPracticePage        = lazy(() => import('./pages/papers/PaperPracticePage').then(m => ({ default: m.PaperPracticePage })));
 const MentorClassroomPage      = lazy(() => import('./pages/classroom/MentorClassroomPage').then(m => ({ default: m.MentorClassroomPage })));
+const WeeklyTopicsPage         = lazy(() => import('./pages/weekly/WeeklyTopicsPage').then(m => ({ default: m.WeeklyTopicsPage })));
+const WeeklyTopicDetailPage    = lazy(() => import('./pages/weekly/WeeklyTopicDetailPage').then(m => ({ default: m.WeeklyTopicDetailPage })));
 
 // ── Admin Pages (lazy loaded) ────────────────────────────────────
 const AdminDashboard          = lazy(() => import('./pages/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
@@ -74,6 +76,8 @@ export function App() {
 
             {/* ── Student Routes ── */}
             <Route path="/dashboard"     element={<StudentPage><StudentDashboard /></StudentPage>} />
+            <Route path="/weekly-topics"           element={<StudentPage><WeeklyTopicsPage /></StudentPage>} />
+            <Route path="/weekly-topics/:topicId"  element={<StudentPage><WeeklyTopicDetailPage /></StudentPage>} />
             <Route path="/learn"         element={<StudentPage><SubjectListPage /></StudentPage>} />
             <Route path="/learn/:subjectCode" element={<StudentPage><TopicListPage /></StudentPage>} />
             <Route path="/concept/:topicId"   element={<StudentPage><ConceptViewPage /></StudentPage>} />

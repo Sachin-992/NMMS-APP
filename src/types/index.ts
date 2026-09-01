@@ -133,6 +133,7 @@ export type SourceType =
   | 'OFFICIAL_SAMPLE'
   | 'TEACHER_CREATED_FROM_OFFICIAL_PATTERN'
   | 'VERIFIED_NMMS_DERIVED'
+  | 'TEXTBOOK_BASED'
   | 'ORIGINAL_NMMS_STYLE';
 
 export type VerificationStatus = 

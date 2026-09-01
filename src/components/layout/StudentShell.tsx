@@ -6,13 +6,14 @@ import {
   LayoutDashboard, BookOpen, Brain, FileCheck, 
   Trophy, MoreHorizontal, LogOut, Globe,
   Flame, Star, ChevronRight, BookOpenCheck, FileText,
-  ShieldAlert, Layers, Award, User
+  ShieldAlert, Layers, Award, User, Sparkles
 } from 'lucide-react';
 import { AppLogo } from '../ui/AppLogo';
 
 // ── Primary nav (shown in sidebar desktop / bottom nav mobile) ──
 const PRIMARY_NAV = [
   { path: '/dashboard',       labelKey: 'dashboard',       icon: LayoutDashboard },
+  { path: '/weekly-topics',   labelKey: 'weekly_topics',   icon: Sparkles },
   { path: '/learn',           labelKey: 'learn',           icon: BookOpen },
   { path: '/practice',        labelKey: 'practice',        icon: Brain },
   { path: '/official-papers', labelKey: 'official_papers', icon: FileText },
